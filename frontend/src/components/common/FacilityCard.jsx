@@ -19,19 +19,37 @@ export default function FacilityCard({
   };
 
   const handleFindRoute = () => {
-    const latitude = facility.latitude;
-    const longitude = facility.longitude;
+  const latitude =
+    facility.latitude ??
+    facility.location?.latitude ??
+    facility.coordinates?.latitude ??
+    facility.coordinates?.lat;
 
-    if (latitude == null || longitude == null) {
-      alert('Location coordinates are not available for this facility.');
-      return;
-    }
+  const longitude =
+    facility.longitude ??
+    facility.location?.longitude ??
+    facility.coordinates?.longitude ??
+    facility.coordinates?.lng;
 
+  // If coordinates are available, use exact location
+  if (latitude != null && longitude != null) {
     window.open(
       `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`,
       '_blank'
     );
-  };
+    return;
+  }
+
+  // Fallback: search using facility name + city
+  const destination = encodeURIComponent(
+    `${facility.name}, ${facility.city || ''}`
+  );
+
+  window.open(
+    `https://www.google.com/maps/dir/?api=1&destination=${destination}`,
+    '_blank'
+  );
+};
 
   const handleRequestHelp = () => {
     if (onRequestHelp) {
