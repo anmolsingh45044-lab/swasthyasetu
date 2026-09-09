@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Clock3, Droplet, Wind, ShieldCheck, MapPinned } from 'lucide-react';
 import { BLOOD_GROUPS } from '../../constants';
 import { bloodService } from '../../services/bloodService';
@@ -14,9 +14,13 @@ const STATUS_FLOW = [
 ];
 
 export default function EmergencyRequestPage() {
-  const { resourceType } = useParams();
-  const navigate = useNavigate();
-  const isBlood = (resourceType || '').toLowerCase() === 'blood';
+ const { resourceType } = useParams();
+const navigate = useNavigate();
+const [searchParams] = useSearchParams();
+
+const facilityId = searchParams.get('facility');
+
+const isBlood = (resourceType || '').toLowerCase() === 'blood';
   const resourceLabel = isBlood ? 'Blood' : 'Oxygen';
 
   const initialForm = useMemo(
@@ -47,15 +51,16 @@ export default function EmergencyRequestPage() {
 
     try {
       const payload = isBlood
-        ? {
-            patientName: form.patientName,
-            mobileNumber: form.mobileNumber,
-            bloodGroup: form.bloodGroup,
-            units: Number(form.quantity),
-            deliveryAddress: form.deliveryAddress,
-            urgency: form.urgency,
-            notes: 'Emergency blood delivery request'
-          }
+       ? {
+    patientName: form.patientName,
+    mobileNumber: form.mobileNumber,
+    bloodGroup: form.bloodGroup,
+    units: Number(form.quantity),
+    deliveryAddress: form.deliveryAddress,
+    urgency: form.urgency,
+   facility: facilityId,
+    notes: 'Emergency blood delivery request'
+  }
         : {
             patientName: form.patientName,
             mobileNumber: form.mobileNumber,
@@ -63,6 +68,7 @@ export default function EmergencyRequestPage() {
             quantity: Number(form.quantity),
             deliveryAddress: form.deliveryAddress,
             urgency: form.urgency,
+            facility: facilityId,
             details: 'Emergency oxygen delivery request'
           };
 
