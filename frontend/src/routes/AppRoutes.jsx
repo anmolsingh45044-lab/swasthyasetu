@@ -6,7 +6,7 @@ import UserLayout from '../layouts/UserLayout';
 import AdminLayout from '../layouts/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
-
+import RequestHelp from "./pages/RequestHelp";
 import Landing from '../pages/public/Landing';
 import Facilities from '../pages/public/Facilities';
 import BloodSearch from '../pages/public/BloodSearch';
@@ -55,11 +55,16 @@ export default function AppRoutes() {
         <Route path="/" element={<Landing />} />
         <Route path="/how-it-works" element={<Landing />} />
         <Route path="/facilities" element={<Facilities />} />
+        
         <Route path="/hospital/:id" element={<FacilityDetails />} />
         <Route path="/blood" element={<BloodSearch />} />
         <Route path="/beds" element={<BedsSearch />} />
         <Route path="/oxygen" element={<OxygenSearch />} />
         <Route path="/request/:resourceType" element={<EmergencyRequestPage />} />
+        <Route
+  path="/requests/new"
+  element={<EmergencyRequestPage />}
+/>
         <Route path="/track/:requestId" element={<TrackRequestPage />} />
       </Route>
 
