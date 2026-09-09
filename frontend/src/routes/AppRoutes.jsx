@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
+import FacilityDetails from '../pages/public/FacilityDetails';
 import PublicLayout from '../layouts/PublicLayout';
 import UserLayout from '../layouts/UserLayout';
 import AdminLayout from '../layouts/AdminLayout';
@@ -55,6 +55,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Landing />} />
         <Route path="/how-it-works" element={<Landing />} />
         <Route path="/facilities" element={<Facilities />} />
+        <Route path="/hospital/:id" element={<FacilityDetails />} />
         <Route path="/blood" element={<BloodSearch />} />
         <Route path="/beds" element={<BedsSearch />} />
         <Route path="/oxygen" element={<OxygenSearch />} />
