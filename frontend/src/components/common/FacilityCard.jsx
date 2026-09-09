@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 export default function FacilityCard({
   facility,
   onRequestHelp,
+  resourceType,
 }) {
   const navigate = useNavigate();
 
@@ -51,14 +52,20 @@ export default function FacilityCard({
   );
 };
 
-  const handleRequestHelp = () => {
-    if (onRequestHelp) {
-      onRequestHelp(facility);
-      return;
-    }
+ const handleRequestHelp = () => {
+  if (onRequestHelp) {
+    onRequestHelp(facility);
+    return;
+  }
 
-    navigate(`/requests/new?facility=${facility._id || facility.id}`);
-  };
+  const facilityId = facility._id || facility.id;
+
+  if (resourceType) {
+    navigate(`/request/${resourceType}?facility=${facilityId}`);
+  } else {
+    navigate(`/requests/new?facility=${facilityId}`);
+  }
+};
 
   return (
     <div className="card flex flex-col gap-4">

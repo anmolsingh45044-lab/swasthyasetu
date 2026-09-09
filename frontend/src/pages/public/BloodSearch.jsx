@@ -64,11 +64,11 @@ export default function BloodSearch() {
               <p className="mt-3 font-semibold text-ink">{item.facility?.name}</p>
               <p className="text-sm text-ink/50">{item.facility?.city}</p>
               <button
-                onClick={() => (isAuthenticated ? navigate('/patient/dashboard') : navigate('/request/blood'))}
-                className="btn-primary mt-4 w-full !py-2 text-sm"
-              >
-                Request Blood
-              </button>
+  onClick={() => navigate('/request/blood')}
+  className="btn-primary mt-4 w-full !py-2 text-sm"
+>
+  Request Blood
+</button>
             </div>
           ))}
         </div>
