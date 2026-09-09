@@ -6,7 +6,7 @@ import UserLayout from '../layouts/UserLayout';
 import AdminLayout from '../layouts/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
-import RequestHelp from "./pages/RequestHelp";
+
 import Landing from '../pages/public/Landing';
 import Facilities from '../pages/public/Facilities';
 import BloodSearch from '../pages/public/BloodSearch';
